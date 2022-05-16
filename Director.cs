@@ -1,57 +1,68 @@
-class Director{
-   /*
-   A code template for a person who directs the game. The responsibility of 
-   this class of objects is to control the sequence of play.
+namespace Unit03.Game
+{
+    /// <summary>
+    /// <para>A person who directs the game.</para>
+    /// <para>
+    /// The responsibility of a Director is to control the sequence of play.
+    /// </para>
+    /// </summary>
+   public class Director
+   {
+      private Hider hider = new Hider();
+      private bool isPlaying = true;
+      private Seeker seeker = new Seeker();
+      private TerminalService terminalService = new TerminalService();
 
-   Attributes:
-         console (Console): An instance of the class of objects known as Console.
-         keepPlaying (boolean): Whether or not the game can continue.
-         seeker (Seeker): An instance of the class of objects known as Seeker.
-         hider (Hider): An instance of the class of objects known as Hider.
-   */
-
-   In_Out in_out;
-   Seeker seeker;
-   Hider hider;
-   bool keepPlaying;
-
-   // The class constructor
-   public Director(){
-      in_out = new In_Out();
-      seeker = new Seeker();
-      hider = new Hider();
-      keepPlaying = true;
-   }
-
-   // Starts the game loop to control the sequence of play
-   public void StartGame(){
-      while (keepPlaying){
-         GetInputs();
-         DoUpdates();
-         DoOutputs();
+      /// <summary>
+      /// Constructs a new instance of Director.
+      /// </summary>
+      public Director()
+      {
       }
-   }
 
-   // Gets the inputs at the beginning of each round of play. In this case,
-   // that means moving the seker to a new location
-   public void GetInputs(){
-      string message = seeker.GetMessage();
-      Console.WriteLine(message);
-      int location = in_out.ReadNumber("Enter a location [1-1000]: ");
-      seeker.Move(location);
-   }
+      /// <summary>
+      /// Starts the game by running the main game loop.
+      /// </summary>
+      public void StartGame()
+      {
+         while (isPlaying)
+         {
+            GetInputs();
+            DoUpdates();
+            DoOutputs();
+         }
+      }
 
-   // Updates the important game information of each round of play. In
-   // this case, that means the hider watches the seeker.
-   public void DoUpdates(){
-      hider.Watch(seeker.location());
-   }
+      /// <summary>
+      /// Moves the seeker to a new location.
+      /// </summary>
+      private void GetInputs()
+      {
+         terminalService.WriteText(hider.location.ToString());
+         int location = terminalService.ReadNumber("\nEnter a location [1-1000]: ");
+         seeker.MoveLocation(location);
+      }
 
-   // Outputs the important game information for each round of play. In
-   // this case, that means the hider provides a hint.
-   public void DoOutputs(){
-      string hint = hider.GetHint();
-      in_out.Write(hint);
-      keepPlaying = hider.distance[-1] != 0;
+      /// <summary>
+      /// Keeps watch on where the seeker is moving.
+      /// </summary>
+      private void DoUpdates()
+      {
+         hider.WatchSeeker(seeker);
+      }
+
+      /// <summary>
+      /// Provides a hint for the seeker to use.
+      /// </summary>
+      private void DoOutputs()
+      {
+         string hint = hider.GetHint();
+         terminalService.WriteText(hint);
+         if (hider.IsFound())
+         {
+            isPlaying = false;
+         }
+      
+      }
    }
 }

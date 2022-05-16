@@ -1,55 +1,40 @@
-class Seeker
+using System;
+
+
+namespace Unit03.Game
 {
-   /*
-   A code template for the seeker who looks for the hider. The
-   responsibility of this class of the objects is to move from location to
-   location in pursuit of the Hider.
+   // TODO: Implement the Seeker class as follows...
 
-   Attributes:
-      location (integer): The location of the Seeker (1-1000).
-      distance (list): The distance travelled with each move.
-   */
+   // 1) Add the class declaration. Use the following class comment.
 
-   Random random = new Random();
-   List<int> distance;
-   int location;
+      /// <summary>
+      /// <para>The person looking for the Hider.</para>
+      /// <para>
+      /// The responsibility of a Seeker is to keep track of its location.
+      /// </para>
+      /// </summary>
 
-   public Seeker()
-   {
-      distance = new List<int>();
-      location = random.Next(999) + 1;
-   }
 
-   /*
-   Gets a message from the seeker.
-   Returns:
-      string: A message from the seeker.
-   */
-   public string GetMessage()
-   {
-      string message = "\nI'm going to find you!";
-      if (distance[-1] == 0)
-      {
-         message = "\nI'm going to find you!";
-      }
-      else if (distance[-1] < distance[-2])
-      {
-         message = "\nShhh. I'm sneaking in now...";
-      }
-      else if (distance[-1] > distance[-2])
-      {
-         message = "\nI'm running around, but I'll find you...";
-      }
-      return message;
-   }
+   // 2) Create the class constructor. Use the following method comment.
 
-   /*
-   Moves to the given loation and keeps track of the distance.
-   */
-   public void Move(int location)
-   {
-      int distance = this.location - location;
-      this.distance.Add(distance);
-      this.location = location;
-   }
+      /// <summary>
+      /// Constructs a new instance of Seeker.
+      /// </summary>
+
+
+   // 3) Create the GetLocation() method. Use the following method comment.
+
+      /// <summary>
+      /// Gets the current location.
+      /// </summary>
+      /// <returns>The current location as an int.</returns>
+
+
+   // 4) Create the MoveLocation(int location) method. Use the following method comment.
+
+      /// <summary>
+      /// Moves to the given location.
+      /// </summary>
+      /// <param name="location">The given location.</param>
+
 }
