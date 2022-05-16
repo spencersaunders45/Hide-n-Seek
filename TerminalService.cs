@@ -1,7 +1,7 @@
 using System;
 
 
-namespace Unit03.Game
+namespace Hide_n_Seek
 {
    /// <summary>
    /// <para>A service that handles terminal operations.</para>

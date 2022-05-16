@@ -1,4 +1,4 @@
-namespace Unit03.Game
+namespace Hide_n_Seek
 {
     /// <summary>
     /// <para>A person who directs the game.</para>
